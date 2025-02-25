@@ -2,13 +2,10 @@ import customtkinter as ctk
 
 from view.interfazAlternativas import AlternativasFrame
 from view.interfazFlujos import FlujosFrame
+from config import * # Colores, constantes, etc
 
 def main():
 
-    dark_gray_1 = "#242424"
-    dark_gray_2 = "#2b2b2b"
-    light_gray = "#4a4a4a"
-    dark_blue = "#1f6aa5"
 
     ctk.set_default_color_theme("blue") 
     ctk.set_appearance_mode("dark")
@@ -35,9 +32,8 @@ def main():
 
     # con tabView.add estamos añadiendo una pestaña a nuestra lista o barrita
     flujosTab = tabView.add("Flujos de Caja")
-    flujos_frame = FlujosFrame(flujosTab)
-    flujos_frame.pack(expand=True, fill="both")
-
+    FlujosFrame(flujosTab)
+    
 
     # lo mismo de arriba pero añadiendo otra pestaña
     alternativasTab = tabView.add("Elección de Alternativas")

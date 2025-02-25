@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from config import *
 
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
 # podemos ser mas modulares y robustos
@@ -6,6 +7,8 @@ class AlternativasFrame(ctk.CTkFrame):
     def __init__(self, parent):
         super().__init__(parent)
         self.create_widgets()
+        self.pack(pady=(3,0),expand=True, fill="both")
+        self.configure(fg_color=dark_gray_2)
 
     # aqui creamos todas las cosas visuales o Widgets que queremos
     def create_widgets(self):
