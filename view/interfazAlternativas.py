@@ -154,9 +154,9 @@ class AlternativasFrame(ctk.CTkFrame):
         # Slider Interes
         def seleccionarInteres(valorInteres):
             print(f"Interes Slider: {valorInteres}")
-            labelInteres.configure(text=f"Interés: {round(valorInteres,2)}")
+            labelInteres.configure(text=f"Interés: {round(valorInteres,2)}%")
         
-        sliderInteres = ctk.CTkSlider(self, from_=0, to=100, 
+        sliderInteres = ctk.CTkSlider(self, from_=0, to=100, number_of_steps=1000,
                                       width = 610,
                                       height = 18,
                                       progress_color = dark_blue,
@@ -238,6 +238,12 @@ class AlternativasFrame(ctk.CTkFrame):
         labelPrompt = ctk.CTkLabel(self, text="Prompt",font=("CTkFont", 18), fg_color="transparent")
         labelPrompt.place(x=647, y=11)
 
+        # Textbox para el Prompt
+        textBoxPrompt = ctk.CTkTextbox(self, width=592, height=120,
+                                       font=("CTkFont", 15),
+                                       corner_radius=0
+                                       )
+        textBoxPrompt.place(x=646, y=45)
 
         # Frame para la respuesta del Prompt 
         frameRespuesta = ctk.CTkFrame(master=self, width=610, height=350, fg_color=dark_gray_3)
@@ -245,6 +251,18 @@ class AlternativasFrame(ctk.CTkFrame):
         # Label para el framePrompt
         labelRespuesta = ctk.CTkLabel(self, text="Análisis",font=("CTkFont", 18), fg_color="transparent")
         labelRespuesta.place(x=647, y=220)
+
+
+        # Textbox para la Respuesta
+        textBoxRespuesta = ctk.CTkTextbox(self, width=592, height=340,
+                                       font=("CTkFont", 15),
+                                       corner_radius=0
+                                       )
+        textBoxRespuesta.place(x=646, y=255)
+
+
+
+
 
         # Boton para enviar los datos y el prompt
         botonEnviarPrompt = ctk.CTkButton(self, 
