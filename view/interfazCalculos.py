@@ -1,5 +1,8 @@
 import customtkinter as ctk
+import inspect
+
 from config import *
+from controller.gestorFrames import mostrarInputsDadoSeleccion
 
 class FlujosCalculosFrame(ctk.CTkFrame):
     def __init__(self, parent):
@@ -12,12 +15,8 @@ class FlujosCalculosFrame(ctk.CTkFrame):
         labelTitulo = ctk.CTkLabel(self, text="¿Qué deseas calcular?",font=("CTkFont", 18), fg_color=light_gray_3)
         labelTitulo.place(x=360, y=35)
 
-        #botonGraficar = ctk.CTkButton(self, text="Calcular", font=("CTkFont", 15),
-                                    #command=lambda:print("Calcular"))
-        #botonGraficar.place(x=30, y=120)
-
         opciones = [
-            "Futuro dado Presente                                                                                                                        ",
+            "Futuro dado Presente",
             "Presente dado Futuro",
             "Presente dado Anualidad",
             "Anualidad dado Presente",
@@ -28,16 +27,16 @@ class FlujosCalculosFrame(ctk.CTkFrame):
             "Presente dado Gradiente Geométrico",  
         ]
 
-
-
+        def llamarFuncion(calculoSeleccionado):
+            mostrarInputsDadoSeleccion(self, calculoSeleccionado)
 
         menuOpciones = ctk.CTkOptionMenu(self, values=opciones,
-                                        width=700,
-                                        height=28,
-                                        font=("CTkFont", 15),
-                                        dropdown_font=("CTkFont", 15),
-                                        dropdown_fg_color=light_gray_3,
-                                        dropdown_hover_color=dark_blue,
+                                        width = 700,
+                                        height = 28,
+                                        font = ("CTkFont", 15),
+                                        dropdown_font = ("CTkFont", 15),
+                                        dropdown_fg_color = light_gray_3,
+                                        dropdown_hover_color = dark_blue,
+                                        command = llamarFuncion
                                         )
         menuOpciones.place(x=455-350, y=90)
-

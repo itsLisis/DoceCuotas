@@ -14,6 +14,7 @@ periodos: float
 def futuroDadoPresente(valorPresente, interes, periodos):
     return valorPresente * ( (1 + interes)**periodos )
 
+
 def presenteDadoFuturo(valorFuturo, interes, periodos):
     return valorFuturo / ( (1 + interes)**periodos )
 
@@ -42,13 +43,13 @@ def anualidadDadoGradienteAritmetico(valorGradienteAritmetico, interes, periodos
     return valorGradienteAritmetico * ( (1 / interes) - ( periodos / ( (1 + interes)**periodos - 1) ) )
 
 # Gradiente Geometrico
-def presenteDadoGradienteGeometrico(valorPrimerPago, valorGradienteGeometrico, interes, periodos):
+def presenteDadoGradienteGeometrico(valorPrimerPago, valorGradienteGeometrico, interes, periodosAlterno):
     if valorGradienteGeometrico != interes:
         return ( 
-                            ( valorPrimerPago * (1 - ((1+valorGradienteGeometrico)/(1+interes))**periodos)) / (interes - valorGradienteGeometrico) 
+                            ( valorPrimerPago * (1 - ((1+valorGradienteGeometrico)/(1+interes))**periodosAlterno)) / (interes - valorGradienteGeometrico) 
                         )
     elif valorGradienteGeometrico == interes:
-        return ( valorPrimerPago * (periodos / (1+interes)) )
+        return ( valorPrimerPago * (periodosAlterno / (1+interes)) )
 
 
 # Tests
@@ -78,4 +79,4 @@ def test_formulas_financieras():
     print("¡Todos los tests pasaron exitosamente!")
 
 # Ejecutar los tests
-test_formulas_financieras()
+#test_formulas_financieras()
