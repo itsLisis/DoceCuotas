@@ -35,8 +35,7 @@ def main():
 
     # lo mismo de arriba pero añadiendo otra pestaña
     alternativasTab = tabView.add("Elección de Alternativas")
-    alternativas_frame = AlternativasFrame(alternativasTab)
-    alternativas_frame.pack(expand=True, fill="both")
+    AlternativasFrame(alternativasTab)
 
 
     app.mainloop()
