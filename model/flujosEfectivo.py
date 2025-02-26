@@ -12,44 +12,44 @@ periodos: float
 
 # Cantidad Unica
 def futuroDadoPresente(valorPresente, interes, periodos):
-    return valorPresente * ( (1 + interes)**periodos )
+    return round(valorPresente * ( (1 + interes)**periodos ),3)
 
 
 def presenteDadoFuturo(valorFuturo, interes, periodos):
-    return valorFuturo / ( (1 + interes)**periodos )
+    return round(valorFuturo / ( (1 + interes)**periodos ),3)
 
 # Serie Uniforme Presente
 def presenteDadoAnualidad(valorAnualidad, interes, periodos):
-    return valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes * (1 + interes)**periodos) )
+    return round(valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes * (1 + interes)**periodos) ),3)
 
 def anualidadDadoPresente(valorPresente, interes, periodos):
-    return valorPresente * ( ( interes * (1 + interes)**periodos ) / ( (1 + interes)**periodos - 1 ))
+    return round(valorPresente * ( ( interes * (1 + interes)**periodos ) / ( (1 + interes)**periodos - 1 )),3)
 
 # Serie Uniforme Futuro
 def futuroDadoAnualidad(valorAnualidad, interes, periodos):
-    return valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes ) )
+    return round(valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes ) ),3)
 
 def anualidadDadoFuturo(valorFuturo, interes, periodos):
-    return valorFuturo * ( ( interes ) / ( (1 + interes)**periodos - 1 ) )
+    return round(valorFuturo * ( ( interes ) / ( (1 + interes)**periodos - 1 ) ),3)
 
 # Gradiente Aritmetico
 def presenteDadoGradienteAritmetico(valorGradienteAritmetico, interes, periodos):
-    return valorGradienteAritmetico * ( 
+    return round(valorGradienteAritmetico * ( 
                                         ( (1 + interes)**periodos - (interes * periodos) - 1 ) /
                                         ( interes**2 * (1 + interes)**periodos ) 
-                                        )
+                                        ),3)
 
 def anualidadDadoGradienteAritmetico(valorGradienteAritmetico, interes, periodos):
-    return valorGradienteAritmetico * ( (1 / interes) - ( periodos / ( (1 + interes)**periodos - 1) ) )
+    return round(valorGradienteAritmetico * ( (1 / interes) - ( periodos / ( (1 + interes)**periodos - 1) ) ),3)
 
 # Gradiente Geometrico
-def presenteDadoGradienteGeometrico(valorPrimerPago, valorGradienteGeometrico, interes, periodosAlterno):
+def presenteDadoGradienteGeometrico(valorPrimerPago, valorGradienteGeometrico, interes, periodos):
     if valorGradienteGeometrico != interes:
-        return ( 
-                            ( valorPrimerPago * (1 - ((1+valorGradienteGeometrico)/(1+interes))**periodosAlterno)) / (interes - valorGradienteGeometrico) 
-                        )
+        return round(( 
+                            ( valorPrimerPago * (1 - ((1+valorGradienteGeometrico)/(1+interes))**periodos)) / (interes - valorGradienteGeometrico) 
+                        ),3)
     elif valorGradienteGeometrico == interes:
-        return ( valorPrimerPago * (periodosAlterno / (1+interes)) )
+        return round(( valorPrimerPago * (periodos / (1+interes)) ),3)
 
 
 # Tests
