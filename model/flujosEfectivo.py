@@ -1,80 +1,81 @@
-valorPresente: float
-valorFuturo: float
-
-valorAnualidad: float
-
-valorGradienteAritmetico: float
-valorGradienteGeometrico: float
-valorPrimerPago: float
-
-interes: float
-periodos: float
+def calcularPorcentaje(interes) -> float:
+    return interes / 100
 
 # Cantidad Unica
 def futuroDadoPresente(valorPresente, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorPresente * ( (1 + interes)**periodos ),3)
 
 
 def presenteDadoFuturo(valorFuturo, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorFuturo / ( (1 + interes)**periodos ),3)
 
 # Serie Uniforme Presente
 def presenteDadoAnualidad(valorAnualidad, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes * (1 + interes)**periodos) ),3)
 
 def anualidadDadoPresente(valorPresente, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorPresente * ( ( interes * (1 + interes)**periodos ) / ( (1 + interes)**periodos - 1 )),3)
 
 # Serie Uniforme Futuro
 def futuroDadoAnualidad(valorAnualidad, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorAnualidad * ( ( (1 + interes)**periodos - 1 ) / ( interes ) ),3)
 
 def anualidadDadoFuturo(valorFuturo, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorFuturo * ( ( interes ) / ( (1 + interes)**periodos - 1 ) ),3)
 
 # Gradiente Aritmetico
 def presenteDadoGradienteAritmetico(valorGradienteAritmetico, interes, periodos):
+    interes = calcularPorcentaje(interes)
     return round(valorGradienteAritmetico * ( 
                                         ( (1 + interes)**periodos - (interes * periodos) - 1 ) /
                                         ( interes**2 * (1 + interes)**periodos ) 
                                         ),3)
 
-def anualidadDadoGradienteAritmetico(valorGradienteAritmetico, interes, periodos):
-    return round(valorGradienteAritmetico * ( (1 / interes) - ( periodos / ( (1 + interes)**periodos - 1) ) ),3)
+def anualidadDadoGradienteAritmetico(gradiente, interes, periodos):
+    interes = calcularPorcentaje(interes)
+    return round(gradiente * ( (1 / interes) - ( periodos / ( (1 + interes)**periodos - 1) ) ),3)
 
 # Gradiente Geometrico
-def presenteDadoGradienteGeometrico(valorPrimerPago, valorGradienteGeometrico, interes, periodos):
-    if valorGradienteGeometrico != interes:
-        return round(( 
-                            ( valorPrimerPago * (1 - ((1+valorGradienteGeometrico)/(1+interes))**periodos)) / (interes - valorGradienteGeometrico) 
-                        ),3)
-    elif valorGradienteGeometrico == interes:
-        return round(( valorPrimerPago * (periodos / (1+interes)) ),3)
+def presenteDadoGradienteGeometrico(valorPrimerPago, tasaDeCambio, interes, periodos):
+    interes = calcularPorcentaje(interes)
+    tasaDeCambio = calcularPorcentaje(tasaDeCambio)
+
+    if tasaDeCambio != interes:
+        return round(
+            valorPrimerPago * ( (1 - ((1 + tasaDeCambio) / (1 + interes))**periodos) / (interes - tasaDeCambio) ), 3)
+    elif tasaDeCambio == interes:
+        return round(( valorPrimerPago * (periodos / (1+interes)) ), 3)
 
 
 # Tests
 def test_formulas_financieras():
     # Cantidad Única
-    assert round(futuroDadoPresente(100, 0.1, 1), 3) == 110.000, "Error en futuroDadoPresente"
-    assert round(presenteDadoFuturo(110, 0.1, 1), 3) == 100.000, "Error en presenteDadoFuturo"
+    assert futuroDadoPresente(100, 10, 1) == 110.000, "Error en futuroDadoPresente"
+    assert presenteDadoFuturo(110, 10, 1) == 100.000, "Error en presenteDadoFuturo"
 
     # Serie Uniforme Presente
-    assert round(presenteDadoAnualidad(100, 0.1, 5), 3) == 379.079, "Error en presenteDadoAnualidad"
-    assert round(anualidadDadoPresente(379.079, 0.1, 5), 3) == 100.000, "Error en anualidadDadoPresente"
+    assert presenteDadoAnualidad(100, 10, 5) == 379.079, "Error en presenteDadoAnualidad"
+    assert anualidadDadoPresente(379.079, 10, 5) == 100.000, "Error en anualidadDadoPresente"
 
     # Serie Uniforme Futuro
-    assert round(futuroDadoAnualidad(100, 0.1, 5), 3) == 610.510, "Error en futuroDadoAnualidad"
-    assert round(anualidadDadoFuturo(610.510, 0.1, 5), 3) == 100.000, "Error en anualidadDadoFuturo"
+    assert futuroDadoAnualidad(100, 10, 5) == 610.510, "Error en futuroDadoAnualidad"
+    assert anualidadDadoFuturo(610.510, 10, 5) == 100.000, "Error en anualidadDadoFuturo"
 
     # Gradiente Aritmético
-    assert round(presenteDadoGradienteAritmetico(100, 0.1, 5), 3) == 686.180, "Error en presenteDadoGradienteAritmetico"
-    assert round(anualidadDadoGradienteAritmetico(100, 0.1, 5), 3) == 181.013, "Error en anualidadDadoGradienteAritmetico"
+    assert presenteDadoGradienteAritmetico(100, 10, 5) == 686.180, "Error en presenteDadoGradienteAritmetico"
+    assert anualidadDadoGradienteAritmetico(100, 10, 5) == 181.013, "Error en anualidadDadoGradienteAritmetico"
 
     # Gradiente Geométrico (g != i)
-    assert round(presenteDadoGradienteGeometrico(100, 0.05, 0.1, 5), 3) == 415.059, "Error en presenteDadoGradienteGeometrico (g ≠ i)"
+    assert presenteDadoGradienteGeometrico(100, 5, 10, 5) == 415.059, "Error en presenteDadoGradienteGeometrico (g ≠ i)"
     
     # Gradiente Geométrico (g = i)
-    assert round(presenteDadoGradienteGeometrico(100, 0.1, 0.1, 5), 3) == 454.545, "Error en presenteDadoGradienteGeometrico (g = i)"
+    assert presenteDadoGradienteGeometrico(100, 10, 10, 5) == 454.545, "Error en presenteDadoGradienteGeometrico (g = i)"
     
     print("¡Todos los tests pasaron exitosamente!")
 

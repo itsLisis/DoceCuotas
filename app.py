@@ -11,7 +11,7 @@ def main():
     ctk.set_appearance_mode("dark")
 
     app = ctk.CTk()
-    app.geometry("1280x700")
+    app.geometry("1230x670")
     app.title("Doce Cuotas")
 
 
