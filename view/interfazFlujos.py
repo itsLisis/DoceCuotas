@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from config import *
 from controller.gestorFrames import intercambiarFrames
+from view.interfazCalculos import FlujosCalculosFrame
 
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
 # podemos ser mas modulares y robustos
@@ -22,6 +23,7 @@ class FlujosFrame(ctk.CTkFrame):
 
         frameCalculos = ctk.CTkFrame(master=self, width=1012, height=643, fg_color=dark_gray_2)
         frameCalculos.place(x=251, y=0)
+        FlujosCalculosFrame(frameCalculos)
 
         labelTitulo = ctk.CTkLabel(self, text="Cálculos de Flujos",font=("CTkFont", 18), fg_color=dark_gray_2)
         labelTitulo.place(x=45, y=50)

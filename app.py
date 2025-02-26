@@ -18,8 +18,6 @@ def main():
     # Tabview es como una especie de "lista" que va a contener las pestañas
     # como la barrita del navegador para añadir otra pestaña
     tabView = ctk.CTkTabview(app,
-
-        
         fg_color = dark_gray_1, # Color del fondo del Widget
         segmented_button_fg_color = dark_gray_2, # Color del fondo del grupo de pestañas
         segmented_button_selected_color = dark_gray_1, # Colro de la pestaña seleccionada

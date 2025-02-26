@@ -4,4 +4,6 @@ dark_gray_3 = "#181818"
 
 light_gray = "#4a4a4a"
 light_gray_2 = "#4d4d4d"
+light_gray_3 = "#333333"
+
 dark_blue = "#1f6aa5"
