@@ -1,21 +1,140 @@
 import customtkinter as ctk
 from config import *
 
-#from view.interfazAlternativaUno import alternativaUnoFrame
-
-
-
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
 # podemos ser mas modulares y robustos
 class AlternativasFrame(ctk.CTkFrame):
+
     def __init__(self, parent):
         super().__init__(parent)
         self.create_widgets()
         self.pack(pady=(3,0),expand=True, fill="both")
         self.configure(fg_color=dark_gray_2)
 
+        self.periodosAlternativaUno = 0
+        self.posVerticalAlternativaUnoPar = 50
+        self.posVerticalAlternativaUnoImpar = 50
+        
+        self.periodosAlternativaDos = 0
+        self.posVerticalAlternativaDosPar = 325
+        self.posVerticalAlternativaDosImpar = 325
+
     # aqui creamos todas las cosas visuales o Widgets que queremos
     def create_widgets(self):
+        
+        # Esta es una funcion un poco XDDDD, definitivamente no cumple la Unica Responsabilidad pero bue
+        entrysAlternativaUno = []
+        def crearEntryAlternativaUno(self, periodosAlternativaUno, 
+                                     posVerticalAlternativaUnoPar,
+                                     posVerticalAlternativaUnoImpar):
+            
+            if periodosAlternativaUno%2 == 0:
+                inputAlternativaUno = ctk.CTkEntry(self, 
+                                            width=250, 
+                                            height=28, 
+                                            font=("CTkFont", 15),
+                                            placeholder_text=f"Periodo {periodosAlternativaUno}")
+                inputAlternativaUno.place(x=25, y=posVerticalAlternativaUnoPar)
+                self.posVerticalAlternativaUnoPar += 38
+
+            else:
+                inputAlternativaUno = ctk.CTkEntry(self, 
+                                            width=250, 
+                                            height=28, 
+                                            font=("CTkFont", 15),
+                                            placeholder_text=f"Periodo {periodosAlternativaUno}")
+                inputAlternativaUno.place(x=285, y=posVerticalAlternativaUnoImpar)
+                self.posVerticalAlternativaUnoImpar += 38
+
+            entrysAlternativaUno.append(inputAlternativaUno)
+            self.periodosAlternativaUno += 1
+        
+        # Obtener en una lista los valores de los inputs para la alternativaUno
+        valoresAlternativaUno = []
+        def obtenerValoresAlternativaUno():
+            for entry in entrysAlternativaUno:
+                valoresAlternativaUno.append(entry.get())
+
+            print(valoresAlternativaUno)
+
+        # Eliminar ultimo flujo agregado a la alternativaUNo
+        def eliminarUltimoFlujoAlternativaUno(self, 
+                                              periodosAlternativaUno,
+                                              posVerticalAlternativaUnoPar,
+                                              posVerticalAlternativaUnoImpar
+                                              ):
+            
+            if periodosAlternativaUno%2 == 0:
+                if periodosAlternativaUno >= 1:
+                    self.posVerticalAlternativaUnoImpar -= 38
+            else:
+                if periodosAlternativaUno >= 1:
+                    self.posVerticalAlternativaUnoPar -= 38
+            
+            if periodosAlternativaUno > 0:
+                self.periodosAlternativaUno -= 1
+            else:
+                self.periodosAlternativaUno = 0
+
+            entrysAlternativaUno[-1].place_forget()
+            entrysAlternativaUno.pop()
+
+
+        entrysAlternativaDos = []
+        def crearEntryAlternativaDos(self, periodosAlternativaDos, 
+                                     posVerticalAlternativaDosPar,
+                                     posVerticalAlternativaDosImpar):
+            
+            if periodosAlternativaDos%2 == 0:
+                inputAlternativaDos = ctk.CTkEntry(self, 
+                                            width=250, 
+                                            height=28, 
+                                            font=("CTkFont", 15),
+                                            placeholder_text=f"Periodo {periodosAlternativaDos}")
+                inputAlternativaDos.place(x=25, y=posVerticalAlternativaDosPar)
+                self.posVerticalAlternativaDosPar += 38
+
+            else:
+                inputAlternativaDos = ctk.CTkEntry(self, 
+                                            width=250, 
+                                            height=28, 
+                                            font=("CTkFont", 15),
+                                            placeholder_text=f"Periodo {periodosAlternativaDos}")
+                inputAlternativaDos.place(x=285, y=posVerticalAlternativaDosImpar)
+                self.posVerticalAlternativaDosImpar += 38
+
+            entrysAlternativaDos.append(inputAlternativaDos)
+            self.periodosAlternativaDos += 1
+        
+        # Obtener en una lista los valores de los inputs para la alternativaUno
+        valoresAlternativaDos = []
+        def obtenerValoresAlternativaDos():
+            for entry in entrysAlternativaDos:
+                valoresAlternativaDos.append(entry.get())
+
+            print(valoresAlternativaDos)
+
+        # Eliminar ultimo flujo agregado a la alternativaUNo
+        def eliminarUltimoFlujoAlternativaDos(self, 
+                                              periodosAlternativaDos,
+                                              posVerticalAlternativaDosPar,
+                                              posVerticalAlternativaDosImpar
+                                              ):
+            
+            if periodosAlternativaDos%2 == 0:
+                if periodosAlternativaDos >= 1:
+                    self.posVerticalAlternativaDosImpar -= 38
+            else:
+                if periodosAlternativaDos >= 1:
+                    self.posVerticalAlternativaDosPar -= 38
+            
+            if periodosAlternativaDos > 0:
+                self.periodosAlternativaDos -= 1
+            else:
+                self.periodosAlternativaDos = 0
+
+            entrysAlternativaDos[-1].place_forget()
+            entrysAlternativaDos.pop()
 
         # Frame para Alternativa Uno
         frameAlternativaUno = ctk.CTkFrame(master=self, width=610, height=240, fg_color=dark_gray_3)
@@ -35,7 +154,7 @@ class AlternativasFrame(ctk.CTkFrame):
         # Slider Interes
         def seleccionarInteres(valorInteres):
             print(f"Interes Slider: {valorInteres}")
-            labelInteres.configure(text=round(valorInteres,2))
+            labelInteres.configure(text=f"Interés: {round(valorInteres,2)}")
         
         sliderInteres = ctk.CTkSlider(self, from_=0, to=100, 
                                       width = 610,
@@ -56,26 +175,62 @@ class AlternativasFrame(ctk.CTkFrame):
 
         # Boton añadir flujo por periodo para la alternativaUno
         botonAñadirFlujoAlternativaUno = ctk.CTkButton(self, 
-                                                    text="+", 
+                                                    text="➕", 
                                                     fg_color=dark_blue,
-                                                    font=("CTkFont", 20),
+                                                    font=("CTkFont", 12),
                                                     width = 40,
                                                     height = 40,
-                                                    command=lambda: print("Flujo AlternativaUno Añadido"))
+                                                    command=lambda: crearEntryAlternativaUno(self, 
+                                                                        self.periodosAlternativaUno, 
+                                                                        self.posVerticalAlternativaUnoPar,
+                                                                        self.posVerticalAlternativaUnoImpar
+                                                                        )
+                                                    )
         botonAñadirFlujoAlternativaUno.place(x = 575, y = 230)
+
+        # Boton eliminar ultimo flujo para la alternativaUno
+        botonEliminarFlujoAlternativaUno = ctk.CTkButton(self, 
+                                                    text="➖", 
+                                                    fg_color=dark_blue,
+                                                    font=("CTkFont", 12),
+                                                    width = 40,
+                                                    height = 40,
+                                                    command=lambda:eliminarUltimoFlujoAlternativaUno(self, 
+                                                                        self.periodosAlternativaUno, 
+                                                                        self.posVerticalAlternativaUnoPar,
+                                                                        self.posVerticalAlternativaUnoImpar
+                                                                        ))                     
+        botonEliminarFlujoAlternativaUno.place(x = 575, y = 185)
 
 
         # Boton añadir flujo por periodo
         botonAñadirFlujoAlternativaDos = ctk.CTkButton(self, 
-                                                    text="+", 
+                                                    text="➕", 
                                                     fg_color=dark_blue,
-                                                    font=("CTkFont", 20),
+                                                    font=("CTkFont", 12),
                                                     width = 40,
                                                     height = 40,
-                                                    command=lambda: print("Flujo AlternativaDos Añadido"))
+                                                    command=lambda: crearEntryAlternativaDos(self,
+                                                                        self.periodosAlternativaDos,
+                                                                        self.posVerticalAlternativaDosPar,
+                                                                        self.posVerticalAlternativaDosImpar))
         botonAñadirFlujoAlternativaDos.place(x = 575, y = 505)
         
-
+        # Boton eliminar ultimo flujo para la alternativaDos
+        botonEliminarFlujoAlternativaDos = ctk.CTkButton(self, 
+                                                    text="➖", 
+                                                    fg_color=dark_blue,
+                                                    font=("CTkFont", 12),
+                                                    width = 40,
+                                                    height = 40,
+                                                    command=lambda:eliminarUltimoFlujoAlternativaDos(self, 
+                                                                        self.periodosAlternativaDos, 
+                                                                        self.posVerticalAlternativaDosPar,
+                                                                        self.posVerticalAlternativaDosImpar
+                                                                        ))    
+        botonEliminarFlujoAlternativaDos.place(x = 575, y = 460)
+        
+        
         # Frame para el Prompt 
         framePrompt = ctk.CTkFrame(master=self, width=610, height=130, fg_color=dark_gray_3)
         framePrompt.place(x=637, y=40)
@@ -98,12 +253,11 @@ class AlternativasFrame(ctk.CTkFrame):
                                                     font=("CTkFont", 15),
                                                     width = 200,
                                                     height = 28,
-                                                    command=lambda: print("Prompt Enviado"))
+                                                    command=lambda: obtenerValoresAlternativaUno())
         botonEnviarPrompt.place(x = 1043, y = 180)
 
 
 
-        #alternativaUnoFrame(frameAlternativaUno)
+    #alternativaUnoFrame(frameAlternativaUno)
     # aqui le damos funcionalidad a esow Widgets, usando el controlador
     # para que traiga las funciones de calculos
-
