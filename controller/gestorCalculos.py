@@ -102,4 +102,3 @@ def usarInformacionEnviada(listaConTodaLaInformacion) -> str:
     print(promptDeUsuario)
 
     return respuesta
-

@@ -5,7 +5,7 @@ from config import *
 """
     Este es el import de la funcion que usted cree
 """
-from controller.gestorCalculos import usarInformacionEnviada 
+from controller.gestorCalculos import usarInformacionEnviada, enviarInformacion
 
 
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
@@ -49,7 +49,8 @@ class AlternativasFrame(ctk.CTkFrame):
                 Recibe como parametro la lista listaConTodaLaInformacion
             """
             usarInformacionEnviada(listaConTodaLaInformacion)
-        
+
+            actualizarTextoConRespuesta(enviarInformacion())
         
 
         # Frame para Alternativa Uno
@@ -143,7 +144,6 @@ class AlternativasFrame(ctk.CTkFrame):
         labelInteres.place(x=22, y=575)
         
         
-
         def obtenerBoolTMAR():
 
             boolTMAR = switchTMAR.get()
@@ -192,7 +192,6 @@ class AlternativasFrame(ctk.CTkFrame):
         labelRespuesta = ctk.CTkLabel(self, text="Análisis",font=("CTkFont", 18), fg_color="transparent")
         labelRespuesta.place(x=610, y=220)
 
-
         # Textbox para la Respuesta
         textBoxRespuesta = ctk.CTkTextbox(self, width=630, height=352,
                                         fg_color=light_gray_3,
@@ -201,6 +200,8 @@ class AlternativasFrame(ctk.CTkFrame):
                                         state="disable"
                                         )
         textBoxRespuesta.place(x=609, y=260)
+
+
 
         # Boton para enviar los datos y el prompt
         botonEnviarPrompt = ctk.CTkButton(self, 
@@ -212,20 +213,10 @@ class AlternativasFrame(ctk.CTkFrame):
                                                     command=lambda: obtenerValoresParaEnviar())
         botonEnviarPrompt.place(x = 1043, y = 180)
 
-
-
-
-
-
-        """
-        En la funcion actualizarTextoConRespuesta simplemente hay que pasarle el texto plano
-        con la respuesta de ChatGPT (importada desde donde sumercé haga la lógica del back".
-        """
-                                        # Texto plano con respuesta del chatGPT
         def actualizarTextoConRespuesta(texto):
             textBoxRespuesta.configure(state="normal")
 
-            textBoxRespuesta.insert("1.0", "XD"*500) # eliminar o comentar esta linea
-            """#textBoxRespuesta.insert("1.0", AQUI VA EL PARAMETRO {texto})"""
+
+            textBoxRespuesta.insert("1.0", texto)
 
             textBoxRespuesta.configure(state="disable")
