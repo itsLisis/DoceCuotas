@@ -27,3 +27,15 @@ def escogerCalculo(calculoSeleccionado):
     
     elif calculoSeleccionado == "Presente dado Gradiente Geométrico":
         return presenteDadoGradienteGeometrico
+    
+
+
+
+"""
+    La funcion UsarInformacionEnviada es de ejemplo, la puede poner 
+    en donde la necesite siempre y cuando la importe en interfazAlternativas.py
+"""
+def usarInformacionEnviada(listaConTodaLaInformacion):
+    
+    for info in listaConTodaLaInformacion:
+        print(info)

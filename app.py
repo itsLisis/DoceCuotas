@@ -1,8 +1,9 @@
 import customtkinter as ctk
+from config import * 
 
 from view.interfazAlternativas import AlternativasFrame
 from view.interfazFlujos import FlujosFrame
-from config import * # Colores, constantes, etc
+# Colores, constantes, etc
 
 def main():
 
@@ -11,7 +12,7 @@ def main():
     ctk.set_appearance_mode("dark")
 
     app = ctk.CTk()
-    app.geometry("1230x670")
+    app.geometry("1280x720")
     app.title("Doce Cuotas")
 
 

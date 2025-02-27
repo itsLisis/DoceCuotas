@@ -4,6 +4,7 @@ from controller.gestorFrames import intercambiarFrames
 from view.interfazCalculos import FlujosCalculosFrame
 from view.interfazCalculosResultados import FlujosResultadosFrame
 
+
 #from controller.gestorFrames import obtenerValoresEntradas
 
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
@@ -41,8 +42,10 @@ class FlujosFrame(ctk.CTkFrame):
         botonCalcular._fg_color = light_gray
         botonCalcular.place(x=50, y=90)
 
-        botonGraficar = ctk.CTkButton(self, text="Graficar", font=("CTkFont", 15),
-                                    command=lambda:intercambiarFrames(frameGraficos, frameCalculos))
+        botonGraficar = ctk.CTkButton(self, text="Graficar", font=("CTkFont", 15))
+            
+                                    #command=lambda:intercambiarFrames(frameGraficos, frameCalculos))
         botonGraficar._hover_color = dark_blue
         botonGraficar._fg_color = light_gray
         botonGraficar.place(x=50, y=130)
+        botonGraficar.configure(state="disable")
