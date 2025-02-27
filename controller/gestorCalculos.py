@@ -50,7 +50,7 @@ def usarInformacionEnviada(listaConTodaLaInformacion) -> str:
     resultadosRC: list = []
     interesAproximado: list = []
 
-    promptDeUsuario: str = "Información de las alternativas:\n"
+    promptDeUsuario: str = "\n\nInformación de las alternativas:\n"
 
     promptDeUsuario += "- Alternativa Uno:\n"
     promptDeUsuario += f" - Costo inicial (inversión): {listaConTodaLaInformacion[2][0]}\n"
@@ -92,13 +92,13 @@ def usarInformacionEnviada(listaConTodaLaInformacion) -> str:
 
     promptDeUsuario += f"Mi petición:\n\n {listaConTodaLaInformacion[4]}"
 
-    with open("prompt.txt", "r", encoding="utf-8") as file:
+    with open("controller\prompt.txt", "r", encoding="utf-8") as file:
         promptDeDesarrollo = file.read().strip()
 
-    # respuesta: str = obtenerRespuesta(promptDeDesarrollo, promptDeUsuario)
-    respuesta: str = "uwu"
+    respuesta: str = obtenerRespuesta(promptDeDesarrollo, promptDeUsuario)
+    # respuesta: str = "uwu"
 
-    print(promptDeDesarrollo)
-    print(promptDeUsuario)
+    # print(promptDeDesarrollo)
+    # print(promptDeUsuario)
 
     return respuesta

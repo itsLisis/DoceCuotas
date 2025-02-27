@@ -5,7 +5,7 @@ from config import *
 """
     Este es el import de la funcion que usted cree
 """
-from controller.gestorCalculos import usarInformacionEnviada, enviarInformacion
+from controller.gestorCalculos import usarInformacionEnviada
 
 
 # aqui podriamos poner simplemente las funciones sin mas, pero al crear una clase Frame
@@ -48,9 +48,8 @@ class AlternativasFrame(ctk.CTkFrame):
                 gestorCalculos.py en la carpeta controller.
                 Recibe como parametro la lista listaConTodaLaInformacion
             """
-            usarInformacionEnviada(listaConTodaLaInformacion)
 
-            actualizarTextoConRespuesta(enviarInformacion())
+            actualizarTextoConRespuesta(usarInformacionEnviada(listaConTodaLaInformacion))
         
 
         # Frame para Alternativa Uno

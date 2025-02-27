@@ -3,6 +3,8 @@ from sympy import symbols, Eq, nsolve
 from model.flujosEfectivo import *
 
 def mcm(a, b):
+    a = int(a)
+    b = int(b)
     return abs(a * b) // math.gcd(a, b)
 
 
