@@ -17,50 +17,25 @@ def alternativaPorTabla(TMAR, alternativaUno: list, alternativaDos: list) -> boo
 
     resultados: list = []
 
-    valorA = 0
-    valorB = 0
-    for i in range(minimoComunMultiplo):
-        if i == 0:
-            # inversion
-            valorA = -alternativas[0][0]
-            valorB = -alternativas[1][0]
-            resultados.append(valorB - valorA)
-            continue
-
-        if i % alternativas[0][3] != 0:
-            # costo de operacion
-            valorA = -alternativas[0][1]
-        else:
-            # costo de operacion
-            valorA = -alternativas[0][1]
-            # valor rescate
-            valorA += alternativas[0][2]
-            # inversion
-            valorA += -alternativas[0][0]
-
-        if i % alternativas[1][3] != 0:
-            # costo de operacion
-            valorB = -alternativas[1][1]
-        else:
-            # costo de operacion
-            valorB = -alternativas[1][1]
-            # valor rescate
-            valorB += alternativas[1][2]
-            # inversion
-            valorB += -alternativas[1][0]
-
+    # Inversión inicial
+    valorA = -alternativas[0][0]
+    valorB = -alternativas[1][0]
+    resultados.append(valorB - valorA)
+    
+    for i in range(1, minimoComunMultiplo):
+        valorA = -alternativas[0][1]  # Costo de operación
+        if i % alternativas[0][3] == 0:
+            valorA += alternativas[0][2] - alternativas[0][0]  # Valor rescate e inversión
+        
+        valorB = -alternativas[1][1]  # Costo de operación
+        if i % alternativas[1][3] == 0:
+            valorB += alternativas[1][2] - alternativas[1][0]  # Valor rescate e inversión
+        
         resultados.append(valorB - valorA)
-
-        if i == (minimoComunMultiplo - 1):
-            # costo de operacion
-            valorA = -alternativas[0][1]
-            # valor rescate
-            valorA += alternativas[0][2]
-            # costo de operacion
-            valorB = -alternativas[1][1]
-            # valor rescate
-            valorB += alternativas[1][2]
-            resultados.append(valorB - valorA)
+    
+    valorA = -alternativas[0][1] + alternativas[0][2]  # Último costo + rescate
+    valorB = -alternativas[1][1] + alternativas[1][2]  # Último costo + rescate
+    resultados.append(valorB - valorA)
 
     # DESPEJAR I
     i = symbols('i')
