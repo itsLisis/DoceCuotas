@@ -5,17 +5,9 @@ from model.flujosEfectivo import *
 def mcm(a, b):
     return abs(a * b) // math.gcd(a, b)
 
-def alternativaPorTabla(interes, alternativaUno: list, alternativaDos: list, TMAR) -> bool:
+def alternativaPorTabla(TMAR, alternativaUno: list, alternativaDos: list) -> bool:
+    """Retorna True si la alternativaUno es la adecuada. False en caso contrario"""
     minimoComunMultiplo = mcm(alternativaUno[3], alternativaDos[3])
-
-    vecesForUno = 1
-    vecesForDos = 1
-
-    if (minimoComunMultiplo > alternativaUno[3]):
-        vecesForUno = minimoComunMultiplo / alternativaUno[3]
-
-    if (minimoComunMultiplo > alternativaDos[3]):
-        vecesForDos = minimoComunMultiplo / alternativaDos[3]
 
     alternativas: list = [alternativaUno, alternativaDos]
 
@@ -23,26 +15,69 @@ def alternativaPorTabla(interes, alternativaUno: list, alternativaDos: list, TMA
         alternativas[1] = alternativaUno
         alternativas[0] = alternativaDos
 
+    resultados: list = []
+
+    valorA = 0
+    valorB = 0
     for i in range(minimoComunMultiplo):
         if i == 0:
+            # inversion
+            valorA = -alternativas[0][0]
+            valorB = -alternativas[1][0]
+            resultados.append(valorB - valorA)
+            continue
 
+        if i % alternativas[0][3] != 0:
+            # costo de operacion
+            valorA = -alternativas[0][1]
+        else:
+            # costo de operacion
+            valorA = -alternativas[0][1]
+            # valor rescate
+            valorA += alternativas[0][2]
+            # inversion
+            valorA += -alternativas[0][0]
 
-    alternativas[]
+        if i % alternativas[1][3] != 0:
+            # costo de operacion
+            valorB = -alternativas[1][1]
+        else:
+            # costo de operacion
+            valorB = -alternativas[1][1]
+            # valor rescate
+            valorB += alternativas[1][2]
+            # inversion
+            valorB += -alternativas[1][0]
 
+        resultados.append(valorB - valorA)
 
+        if i == (minimoComunMultiplo - 1):
+            # costo de operacion
+            valorA = -alternativas[0][1]
+            # valor rescate
+            valorA += alternativas[0][2]
+            # costo de operacion
+            valorB = -alternativas[1][1]
+            # valor rescate
+            valorB += alternativas[1][2]
+            resultados.append(valorB - valorA)
 
     # DESPEJAR I
-
     i = symbols('i')
-    x_vals = [-17000, 400, 400, 17400, 400, 400, 2100]
+    expr = sum(x_k / (1 + i) ** k for k, x_k in enumerate(resultados))
 
-    expr = sum(x_k / (1 + i) ** k for k, x_k in enumerate(x_vals))
+    solucion = nsolve(Eq(expr, 0), 0.07) * 100
+    print(solucion)
 
-    solucion = nsolve(Eq(expr, 0), 0.05) * 100
+    print(f"A: {alternativas[0][0]}, B: {alternativas[1][0]}")
+    # for i in range(len(resultados)):
+    #     print(resultados[i])
+    # print(sum(resultados))
 
-    if (solucion > TMAR):
-
-    
+    if solucion < TMAR:
+        return alternativas[0][0] == alternativaUno[0]
+    else:
+        return False
 
 
 def alternativaPorRC(interes, alternativaUno: list, alternativaDos: list, listaResultados: list) -> bool:
@@ -99,9 +134,12 @@ alternativaDos.append(6)
 # alternativaDos.append(25000)
 # alternativaDos.append(6)
 
-interes = 7.471
+
+interes = 20
 # interes = 15
 resultados: list = []
+
+print(alternativaPorTabla(interes, alternativaUno, alternativaDos))
 
 # print(alternativaPorRC(interes, alternativaUno, alternativaDos, resultados))
 # print(f"Resultado AlternativaUno: {resultados[0]}\nResultado AlternativaDos: {resultados[1]}")
