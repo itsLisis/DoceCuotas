@@ -39,3 +39,7 @@ def usarInformacionEnviada(listaConTodaLaInformacion):
     
     for info in listaConTodaLaInformacion:
         print(info)
+
+        
+def enviarInformacion():
+    return "ESTA ES LA RESPUESTA DEL PROMPT"
